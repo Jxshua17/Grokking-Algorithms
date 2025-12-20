@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class SortingAlgorithms {
 
-    public static int[] FindSmallest(ArrayList<Integer> anArray){
+    public static int findSmallest(ArrayList<Integer> anArray){
         int smallestNumber = anArray.get(0);
         int smallestIndex = 0;
 
@@ -13,30 +12,33 @@ public class SortingAlgorithms {
                 smallestIndex = i;
             }
         }
-        return new int[]{smallestIndex, smallestNumber};
+        return smallestIndex;
     }
+
+    //writing this here instead of the commit message.
+    //you might be wondering why the amount of loops in the for-loop above is different from the one below. it is actually very simple.
+    //with the way the logic is written for finding the index of the smallest number, you are comparing n-1 times where n is the number of items.
+    //you won't be comparing the first number against itself but rather against the second and so on.
+    //but in the case of selection sort, the nuumber of operation is just n times. the runtime is O(n).
 
     public static ArrayList<Integer> SelectionSort(ArrayList<Integer> unsortedArray){
         ArrayList<Integer> sortedArray = new ArrayList<>();
         int unsortedArraySize = unsortedArray.size();
 
         for(int i=1;i<=unsortedArraySize;i++){
-            int [] returnedArray = SortingAlgorithms.FindSmallest(unsortedArray);
-            int smallestIndex = returnedArray[0];
-            int smallestNumber = returnedArray[1];
+            int smallestIndex = SortingAlgorithms.findSmallest(unsortedArray);
 
+            sortedArray.add(unsortedArray.get(smallestIndex));
             unsortedArray.remove(smallestIndex);
-            sortedArray.add(smallestNumber);
         }
 
         /*while (sortedArray.size() != unsortedArraySize){
-            int [] returnedArray = SortingAlgorithms.FindSmallest(unsortedArray);
-            int smallestIndex = returnedArray[0];
-            int smallestNumber = returnedArray[1];
+            int smallestIndex = SortingAlgorithms.FindSmallest(unsortedArray);
 
+            sortedArray.add(unsortedArray.get(smallestIndex));
             unsortedArray.remove(smallestIndex);
-            sortedArray.add(smallestNumber);
         }*/
+
         return sortedArray;
     }
 }
