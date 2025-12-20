@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class SearchAlgorithms {
 
-    public int BinarySearch(int [] sortedList, int item){
+    public static int binarySearch(int [] sortedList, int item){
         //item is the number we are looking for and the sortedList is the haystack we are going through.
 
         int low = 0;
@@ -28,7 +28,7 @@ public class SearchAlgorithms {
 
     //i wanted to write something for a resizable array and i couldn't do that with the regular arrays so i made use of ArrayList
     //I also had to use method overloading here so that i could have the same method that accepts an ArrayList rather than a regular Array.
-    public int BinarySearch(ArrayList<Integer> sortedList, int item){
+    public static int binarySearch(ArrayList<Integer> sortedList, int item){
         //item is the number we are looking for and the sortedList is the haystack we are going through.
 
         int low = 0;
@@ -53,7 +53,7 @@ public class SearchAlgorithms {
 
     //i want to see if i can write a simple search.
 
-    public int SimpleSearch(int [] sortedList, int item){
+    public static int simpleSearch(int [] sortedList, int item){
         int low = 0;
         int high = sortedList.length - 1;
 
