@@ -20,6 +20,19 @@ class SortingAlgorithmsTest {
     }
 
     @Test
+    void findBiggest() {
+        int [] unsortedArray = {2, 3, 5, 23, 54, 65, 76, 12, 32, 21, 43, 64, 78};
+        ArrayList<Integer> unsortedArray1 = new ArrayList<>();
+
+        for (int n: unsortedArray){
+            unsortedArray1.add(n);
+        }
+        int biggestNumber = SortingAlgorithms.findBiggest(unsortedArray1);
+
+        assertEquals(unsortedArray1.get(biggestNumber), 78);
+    }
+
+    @Test
     void selectionSort() {
         int [] unsortedArray = {3, 5, 23, 54, 65, 76, 12, 32, 21, 43, 64, 78};
         int [] sortedArray = {3, 5, 12, 21, 23, 32, 43, 54, 64, 65, 76, 78};
@@ -35,7 +48,7 @@ class SortingAlgorithmsTest {
         }
 
 
-        assertEquals(SortingAlgorithms.SelectionSort(unsortedArray1), sortedArray1);
+        assertEquals(SortingAlgorithms.selectionSort(unsortedArray1), sortedArray1);
     }
 
     @Test
@@ -54,6 +67,6 @@ class SortingAlgorithmsTest {
         }
 
 
-        assertEquals(SortingAlgorithms.SelectionSort(unsortedArray1), sortedArray1);
+        assertEquals(SortingAlgorithms.selectionSort(unsortedArray1), sortedArray1);
     }
 }

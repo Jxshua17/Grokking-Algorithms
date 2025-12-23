@@ -15,13 +15,27 @@ public class SortingAlgorithms {
         return smallestIndex;
     }
 
+    public static int findBiggest(ArrayList<Integer> anArray){
+        int biggestNumber = anArray.get(0);
+        int biggestNumberIndex = 0;
+
+        for (int i=1;i<anArray.size();i++){
+            if (anArray.get(i) > biggestNumber){
+                biggestNumber = anArray.get(i);
+                biggestNumberIndex = i;
+            }
+        }
+        return biggestNumberIndex;
+    }
+
     //writing this here instead of the commit message.
     //you might be wondering why the amount of loops in the for-loop above is different from the one below. it is actually very simple.
     //with the way the logic is written for finding the index of the smallest number, you are comparing n-1 times where n is the number of items.
     //you won't be comparing the first number against itself but rather against the second and so on.
     //but in the case of selection sort, the nuumber of operation is just n times. the runtime is O(n).
 
-    public static ArrayList<Integer> SelectionSort(ArrayList<Integer> unsortedArray){
+    //TODO refactor SelectionSort to selectionSort so as to keep up with the naming conventions for methods.
+    public static ArrayList<Integer> selectionSort(ArrayList<Integer> unsortedArray){
         ArrayList<Integer> sortedArray = new ArrayList<>();
         int unsortedArraySize = unsortedArray.size();
 
