@@ -33,8 +33,6 @@ public class SortingAlgorithms {
     //with the way the logic is written for finding the index of the smallest number, you are comparing n-1 times where n is the number of items.
     //you won't be comparing the first number against itself but rather against the second and so on.
     //but in the case of selection sort, the nuumber of operation is just n times. the runtime is O(n).
-
-    //TODO refactor SelectionSort to selectionSort so as to keep up with the naming conventions for methods.
     public static ArrayList<Integer> selectionSort(ArrayList<Integer> unsortedArray){
         ArrayList<Integer> sortedArray = new ArrayList<>();
         int unsortedArraySize = unsortedArray.size();
@@ -52,6 +50,28 @@ public class SortingAlgorithms {
             sortedArray.add(unsortedArray.get(smallestIndex));
             unsortedArray.remove(smallestIndex);
         }*/
+
+        return sortedArray;
+    }
+
+    //selectionSort2(an algorithm for descending order)
+    public static ArrayList<Integer> selectionSort2(ArrayList<Integer> unsortedArray){
+        ArrayList<Integer> sortedArray = new ArrayList<>();
+        int unsortedArraySize = unsortedArray.size();
+
+        /*for(int i=1;i<=unsortedArraySize;i++){
+            int smallestIndex = SortingAlgorithms.findSmallest(unsortedArray);
+
+            sortedArray.add(unsortedArray.get(smallestIndex));
+            unsortedArray.remove(smallestIndex);
+        }*/
+
+        while (sortedArray.size() != unsortedArraySize){
+            int biggestNumberIndex = SortingAlgorithms.findBiggest(unsortedArray);
+
+            sortedArray.add(unsortedArray.get(biggestNumberIndex));
+            unsortedArray.remove(biggestNumberIndex);
+        }
 
         return sortedArray;
     }
