@@ -15,6 +15,8 @@ public class SortingAlgorithms {
         return smallestIndex;
     }
 
+    //exercise 4.3: find the maximum number in a list.(i already solved it even before i discovered it in the exercises. it is a remix of the above method.)
+
     public static int findBiggest(ArrayList<Integer> anArray){
         int biggestNumber = anArray.get(0);
         int biggestNumberIndex = 0;

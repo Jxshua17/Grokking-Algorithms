@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Recursion {
 
     //this recursion is funny because it is stuck in an infinite loop
@@ -18,6 +20,21 @@ public class Recursion {
         }else {
             return n*(factorial(n-1)); //a recursive case.
         }
+    }
+
+    //exercise 4.1
+    public static int sum(ArrayList<Integer> arrayList){
+        int sum = 0;
+
+        if(arrayList.size() == 1){
+           sum = sum + arrayList.get(0);
+        }else{
+            sum = sum + arrayList.get(0);
+            arrayList.remove(0);
+            int sumOfTheRestOfTheArray = Recursion.sum(arrayList);
+            sum = sum + sumOfTheRestOfTheArray;
+        }
+        return sum;
     }
     public static void main(String[] args) {
         Recursion.recursion(100);
