@@ -36,6 +36,20 @@ public class Recursion {
         }
         return sum;
     }
+
+    //exercise 4.2
+    public static int count(ArrayList<Integer> arrayList){
+        int count = 0;
+
+        if (arrayList.size() == 1){
+            count = 1;
+        }else {
+          count = 1;
+          arrayList.remove(0);
+          count = count + Recursion.count(arrayList);
+        }
+        return count;
+    }
     public static void main(String[] args) {
         Recursion.recursion(100);
         System.out.println(Recursion.factorial(5));

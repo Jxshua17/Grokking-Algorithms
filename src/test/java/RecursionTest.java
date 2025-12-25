@@ -27,4 +27,15 @@ class RecursionTest {
 
         assertEquals(Recursion.sum(arrayList), 24);
     }
+
+    @Test
+    void count() {
+        int [] arrayToCount = {10, 2, 3, 4, 5, 6, 7, 77};
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for(int n:arrayToCount){
+            arrayList.add(n);
+        }
+
+        assertEquals(Recursion.count(arrayList), 8);
+    }
 }
