@@ -77,6 +77,37 @@ public class SortingAlgorithms {
 
         return sortedArray;
     }
+
+
+    //the implementation of the quicksort algorithm in java
+    public static ArrayList<Integer> quickSort(ArrayList<Integer> unsortedArray){
+        ArrayList<Integer> lessSubArray = new ArrayList<>();
+        ArrayList<Integer> largeSubArray = new ArrayList<>();
+        ArrayList<Integer> sortedArray = new ArrayList<>();
+
+        //the base case
+        if (unsortedArray.size() < 2){
+            return unsortedArray;
+        } else { //the recursive case
+            int pivot = unsortedArray.get(0);
+            //TODO setting i=0 was causing the problem. investigate why.
+            for(int i=1;i<unsortedArray.size();i++){
+                if (unsortedArray.get(i) < pivot){
+                    //lessSubArray.add(i); -> terrible. the parameter for the add method is the object and not the index.
+                    lessSubArray.add(unsortedArray.get(i));
+                } else{
+                    largeSubArray.add(unsortedArray.get(i));
+                }
+            }
+
+            while (unsortedArray.size() != sortedArray.size()){
+                sortedArray.addAll(SortingAlgorithms.quickSort(lessSubArray));
+                sortedArray.add(pivot);
+                sortedArray.addAll(SortingAlgorithms.quickSort(largeSubArray));
+            }
+            return sortedArray;
+        }
+    }
 }
 
 //print statements for debugging is quite the interesting concept.
