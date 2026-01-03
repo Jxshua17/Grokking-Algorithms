@@ -124,15 +124,15 @@ public class SortingAlgorithms {
             int high = unsortedArray.size() - 1;
             int mid = (low+high)/2;
             int pivot = unsortedArray.get(mid);
-            System.out.println(pivot);
-            //TODO setting i=0 was causing the problem. investigate why.
-            for(int i=0;i<unsortedArray.size();i++){
-                if (unsortedArray.get(i) < pivot){
+
+            for (Integer integer : unsortedArray) {
+                if (integer < pivot) {
                     //lessSubArray.add(i); -> terrible. the parameter for the add method is the object and not the index.
-                    lessSubArray.add(unsortedArray.get(i));
-                } else if (unsortedArray.get(i) > pivot){
-                    largeSubArray.add(unsortedArray.get(i));
+                    lessSubArray.add(integer);
+                } else if (integer > pivot) {
+                    largeSubArray.add(integer);
                 } else {
+                    //i have no idea when the loop gets to the pivot and compares it against itself. it doesn't do anything
                     pivot = pivot;
                 }
             }
