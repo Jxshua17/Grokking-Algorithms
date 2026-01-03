@@ -71,25 +71,6 @@ class SortingAlgorithmsTest {
     }
 
     @Test
-    void selectionSort2() {
-        int [] unsortedArray = {2, 3, 5, 23, 4, 65, 6, 12, 132, 201, 43, 64, 78};
-        int [] sortedArray = {201, 132, 78, 65, 64, 43, 23, 12, 6, 5, 4, 3, 2};
-        ArrayList<Integer> unsortedArray1 = new ArrayList<>();
-        ArrayList<Integer> sortedArray1 = new ArrayList<>();
-
-        for (int n: unsortedArray){
-            unsortedArray1.add(n);
-        }
-
-        for (int n: sortedArray){
-            sortedArray1.add(n);
-        }
-
-
-        assertEquals(SortingAlgorithms.selectionSort2(unsortedArray1), sortedArray1);
-    }
-
-    @Test
     void quickSort() {
         int [] unsortedArray = {2, 3, 5, 23, 4, 65, 6, 12, 132, 201, 43, 64, 78};
         int [] sortedArray = {2, 3, 4, 5, 6, 12, 23, 43, 64, 65, 78, 132, 201};
@@ -106,5 +87,24 @@ class SortingAlgorithmsTest {
 
 
         assertEquals(SortingAlgorithms.quickSort(unsortedArray1), sortedArray1);
+    }
+
+    @Test
+    void quickSort1() {
+        int [] unsortedArray = {2, 3, 5, 23, 4, 65, 6, 12, 132, 201, 43, 64, 78};
+        int [] sortedArray = {2, 3, 4, 5, 6, 12, 23, 43, 64, 65, 78, 132, 201};
+        ArrayList<Integer> unsortedArray1 = new ArrayList<>();
+        ArrayList<Integer> sortedArray1 = new ArrayList<>();
+
+        for (int n: unsortedArray){
+            unsortedArray1.add(n);
+        }
+
+        for (int n: sortedArray){
+            sortedArray1.add(n);
+        }
+
+        //sorting the same array so which is faster?
+        assertEquals(SortingAlgorithms.quickSort1(unsortedArray1), sortedArray1);
     }
 }

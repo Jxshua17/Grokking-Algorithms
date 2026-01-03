@@ -108,6 +108,43 @@ public class SortingAlgorithms {
             return sortedArray;
         }
     }
+
+    //refining the algorithm so that the pivot used is the number in the middle of the array and not the first.
+    //creating a copy so that i can see the time taken for the different methods to execute.
+    public static ArrayList<Integer> quickSort1(ArrayList<Integer> unsortedArray){
+        ArrayList<Integer> lessSubArray = new ArrayList<>();
+        ArrayList<Integer> largeSubArray = new ArrayList<>();
+        ArrayList<Integer> sortedArray = new ArrayList<>();
+
+        //the base case
+        if (unsortedArray.size() < 2){
+            return unsortedArray;
+        } else { //the recursive case
+            int low = 0;
+            int high = unsortedArray.size() - 1;
+            int mid = (low+high)/2;
+            int pivot = unsortedArray.get(mid);
+            System.out.println(pivot);
+            //TODO setting i=0 was causing the problem. investigate why.
+            for(int i=0;i<unsortedArray.size();i++){
+                if (unsortedArray.get(i) < pivot){
+                    //lessSubArray.add(i); -> terrible. the parameter for the add method is the object and not the index.
+                    lessSubArray.add(unsortedArray.get(i));
+                } else if (unsortedArray.get(i) > pivot){
+                    largeSubArray.add(unsortedArray.get(i));
+                } else {
+                    pivot = pivot;
+                }
+            }
+
+            while (unsortedArray.size() != sortedArray.size()){
+                sortedArray.addAll(SortingAlgorithms.quickSort(lessSubArray));
+                sortedArray.add(pivot);
+                sortedArray.addAll(SortingAlgorithms.quickSort(largeSubArray));
+            }
+            return sortedArray;
+        }
+    }
 }
 
 //print statements for debugging is quite the interesting concept.
