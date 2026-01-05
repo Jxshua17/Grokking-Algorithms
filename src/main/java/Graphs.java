@@ -6,9 +6,7 @@ public class Graphs {
         ArrayDeque<String> searchQueue = new ArrayDeque<>();
 
         //this will get all the strings stored in that array and then add it to the above queue.
-        for (String x: hashtable.get(name)){
-            searchQueue.add(x);
-        }
+        searchQueue.addAll(Arrays.asList(hashtable.get(name)));
 
         //keeping track of names that have been searched.
         ArrayList<String> searchedNames = new ArrayList<>();
@@ -23,9 +21,7 @@ public class Graphs {
                     System.out.println(person + " ends with m so therefore they are a mango seller.");
                     return true;
                 } else {
-                    for (String x: hashtable.get(person)){
-                        searchQueue.add(x);
-                    }
+                    searchQueue.addAll(Arrays.asList(hashtable.get(person)));
                     searchedNames.add(person);
 
                 }
