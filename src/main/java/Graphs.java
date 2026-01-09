@@ -1,3 +1,4 @@
+import javax.sql.rowset.serial.SerialStruct;
 import java.util.*;
 
 public class Graphs {
@@ -32,13 +33,45 @@ public class Graphs {
     }
 
     //Dijkstra's algorithm implementation
-    public static int dijkstrasAlgorithm(){
+    public static int dijkstrasAlgorithm(Hashtable<String, Hashtable<String, Integer>> graphs, Hashtable<String, Integer> costs, Hashtable<String, String> parents) {
+        ArrayList<String> processed = new ArrayList<>();
 
-        return 0;
+        String node = Graphs.findTheLowestNode(costs, processed); //A
+        int newCost = 0;
+        int cost = 0;
+
+        while (node != null) {
+            cost = costs.get(node); //COST=5
+            System.out.println(cost);
+            Hashtable<String, Integer> neighbours = graphs.get(node); //(C->4, D->2)
+            System.out.println(neighbours);
+
+            for (String n : neighbours.keySet()) {
+                newCost = cost + neighbours.get(n); //(10=2+8)
+                System.out.println("the value of the new cost is "+newCost);
+                System.out.println("the value of the key, "+n+" is "+costs.get(n));
+                if (costs.get(n) > newCost) { //5>10
+
+                    System.out.println("node cost before being replaced is "+costs.get(n));
+                    costs.replace(n, newCost);
+                    System.out.println("node cost after being replaced is "+costs.get(n));
+
+                    parents.replace(n, node);
+                    System.out.println("the parent for the node "+n+" is " +parents.get(n));
+                }
+            }
+            processed.add(node);
+            System.out.println(processed);
+            node = Graphs.findTheLowestNode(costs, processed);
+            System.out.println("the next node in the graph that hasn't been processed is "+node);
+        }
+
+        //TODO refine algorithm or create a new one that outputs the nodes in the fastest path rather the weights/time itself.
+        return costs.get("F");
     }
 
     //creating a method for finding the lowest cost and its node in a hashmap
-    public static Hashtable<String, Integer> findTheLowestNode(Hashtable<String, Integer> costs){
+    public static String findTheLowestNode(Hashtable<String, Integer> costs, ArrayList<String> processed){
         //i am using the enum representing infinity from the Float class here before i then cast it to an integer.
         float infinity = Float.POSITIVE_INFINITY;
 
@@ -47,91 +80,27 @@ public class Graphs {
         //i don't imagine i will be working with weights that large. i'll leave this like this until i find a way around this.
 
         String lowestCostNode = null;
-        Hashtable<String, Integer> hashTableToBeReturned = new Hashtable<>();
+        //Hashtable<String, Integer> hashTableToBeReturned = new Hashtable<>();
 
         for (String n: costs.keySet()){
             int cost = costs.get(n);
-            System.out.println("the value for the key, " + n + " is " + cost);
-            if (cost < lowestCost){
+            //TODO clean this print statement when i add the processed array.
+            if ((cost < lowestCost)  && !(processed.contains(n))){
                 lowestCost = cost;
                 lowestCostNode = n;
             }
+            //processed.add(n); -> i think this is what i don't need
         }
-        hashTableToBeReturned.put(lowestCostNode, lowestCost);
+        //hashTableToBeReturned.put(lowestCostNode, lowestCost);
 
-        return hashTableToBeReturned;
+        return lowestCostNode;
     }
 
     public static void main(String[] args) {
 
-        String [] classmates = {"bryan", "princess", "james"};
-        Hashtable<String, String []> friends = new Hashtable<>();
-
-        //friends.put("joshua", new String[]{"Sena", "Ope", "Tolu"});
-        friends.put("ann", classmates);
-
-        System.out.println(friends);
-
-        ArrayDeque<String> classmate2 = new ArrayDeque<>();
-
-        classmate2.addFirst("joshua");
-        classmate2.add("efih");
-        classmate2.add("oghenekome");
-        classmate2.add("vhoke");
-
-        System.out.println(classmate2.peekFirst());
-        classmate2.removeFirst();
-        System.out.println(classmate2.peekFirst());
-        System.out.println(classmate2.peekLast());
-        classmate2.removeLast();
-        System.out.println(classmate2.peekLast());
-
-        //the beginnings of an attempt at implementing breadth-first search in java using the example in the book
-        String [] friend1 = {"alice", "bob", "claire"};
-        String [] friend2 = {"peggy"};
-        String [] friend3 = {"anuj", "peggy"};
-        String [] friend4 = {"thom", "jonny"};
-        String [] friend5 = {};
-        String [] friend6 = {};
-        String [] friend7 = {};
-        String [] friend8 = {};
-
-        Hashtable<String, String []> friendships = new Hashtable<>();
-        friendships.put("josh", friend1);
-        friendships.put("alice", friend2);
-        friendships.put("bob", friend3);
-        friendships.put("claire", friend4);
-        friendships.put("anuj", friend5);
-        friendships.put("peggy", friend6);
-        friendships.put("thom", friend7);
-        friendships.put("jonny", friend8);
-
-        ArrayDeque<String> searchQueue = new ArrayDeque<>();
-        friendships.get("josh");
-        for(String n: friendships.get("josh")){
-            searchQueue.add(n);
-        }
-
-        System.out.println(searchQueue);
-
-        System.out.println(".................a simple test..................");
-
-        Graphs.breadthFirstSearch("josh", friendships);
-
-
         //Dijkstra's algorithm implementation.
-        //just trying to see how to represent all the hashmaps for the cost, parents, graphs
-
-        String [] neighbours1 = {"A", "B"};
-        String [] neighbours2 = {"F"};
-        String [] neighbours3 = {"A", "F"};
-        String [] neighbours4 = {};
-
-        Hashtable<String, String[]> graphite = new Hashtable<>();
-        graphite.put("S", neighbours1);
-        graphite.put("A", neighbours2);
-        graphite.put("B", neighbours3);
-        graphite.put("F", neighbours4);
+        //this is the graph.
+        Hashtable<String, Hashtable<String, Integer>> graph = new Hashtable<>();
 
         Hashtable<String, Integer> S = new Hashtable<>();
         S.put("A", 6);
@@ -146,53 +115,72 @@ public class Graphs {
 
         Hashtable<String, Integer> F = new Hashtable<>(0);
 
+        graph.put("S", S);
+        graph.put("A", A);
+        graph.put("B", B);
+        graph.put("F", F);
+
+
+        System.out.println("......................");
+
+        for (String n: S.keySet()){
+            System.out.println(S.get(n));
+        }
         System.out.println(S.keySet());
-        System.out.println(B.get("A"));
 
-        //infinity in java
-        float inf = Float.POSITIVE_INFINITY;
-        System.out.println(inf);
-        int infinity = (int) inf;
-        float infi = (float) infinity;
         double inf1 = Double.POSITIVE_INFINITY;
-        int in1 = (int) inf1;
-        System.out.println("the value after casting from double to int is" + in1);
-        System.out.println("the value for infintiy according to the double class is " + inf1);
-        System.out.println("after casting infinity, you get "+infinity);
-        System.out.println("after casting infi and adding 1, you get "+(inf+1));
-        System.out.println(3<inf);
-        System.out.println("what do you get when you add 1 to the int version of infinity after casting?"  + (in1 + 1));
+        int infinity = (int) inf1;
 
+        //this is the costs
         Hashtable<String, Integer> costs = new Hashtable<>();
         costs.put("A", 6);
         costs.put("B", 2);
         costs.put("F", infinity);
 
-        Hashtable<String, String[]> parents = new Hashtable<>();
-        parents.put("A",  new String[]{"S"});
-        parents.put("B", new String[]{"S"});
-        parents.put("F", new String[]{});
+        //this is the parent
+        Hashtable<String, String> parents = new Hashtable<>();
+        parents.put("A",  "S");
+        parents.put("B", "S");
+        //since you can't add a null to a hashmap, it makes sense to just us an empty quotes like this ""
+        parents.put("F", "");
 
+
+        //TODO i don't know why the last element to be added to the hashtable when the whole array gets printed appears not at the end.
+
+        System.out.println("......................");
 
         ArrayList<String> processed = new ArrayList<>();
+
+        String node = Graphs.findTheLowestNode(costs, processed);
+        List<Integer> neighbours = Arrays.asList(S.get(node));
+        String [] neighbour = S.keySet().toArray(new String[0]);
+        System.out.println(neighbour+"..........");
+
+
+        //infinity in java
+        float inf = Float.POSITIVE_INFINITY;
+
+
 
         int lowestCost = infinity;
         String lowestCostNode = null;
 
-        for (String n: costs.keySet()){
-            int cost = costs.get(n);
-            System.out.println("the value for the key, " + n + " is " + cost);
-            if (cost < lowestCost){
-                lowestCost = cost;
-                lowestCostNode = n;
-            }
-        }
 
         System.out.println("the lowest cost is " + lowestCost + " its node is " + lowestCostNode);
 
         System.out.println(lowestCostNode);
-        System.out.println(Arrays.toString(parents.get("F")));
 
+        String x = null;
+        System.out.println(x);
+
+        Hashtable<String, Integer> exp = new Hashtable<>();
+        exp.put("s", 2);
+        exp.put("b", 4);
+        exp.put("a", 5);
+
+        System.out.println(exp.get("s"));
+        exp.replace("s", 3);
+        System.out.println(exp.get("s"));
 
 
 
