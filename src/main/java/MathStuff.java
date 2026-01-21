@@ -23,6 +23,21 @@ public class MathStuff {
         }
     }
 
+    public static int permutation(int n, int r){
+        int x = MathStuff.factorial(n);
+        int y = MathStuff.factorial(n-r);
+
+        return x/y;
+    }
+
+    public static int combination(int n, int r){
+        int x = MathStuff.factorial(n);
+        int y = MathStuff.factorial(n-r);
+        int z = MathStuff.factorial(r);
+
+        return x/(y*z);
+    }
+
     public static void main(String[] args) {
 
         //using the main to just do a simple test because the value i get when with a calculator is different from actual.
