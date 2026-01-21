@@ -24,18 +24,11 @@ public class MathStuff {
     }
 
     public static int permutation(int n, int r){
-        int x = MathStuff.factorial(n);
-        int y = MathStuff.factorial(n-r);
-
-        return x/y;
+        return (MathStuff.factorial(n))/(MathStuff.factorial(n-r));
     }
 
     public static int combination(int n, int r){
-        int x = MathStuff.factorial(n);
-        int y = MathStuff.factorial(n-r);
-        int z = MathStuff.factorial(r);
-
-        return x/(y*z);
+        return (MathStuff.factorial(n))/((MathStuff.factorial(n-r))*(MathStuff.factorial(r)));
     }
 
     public static void main(String[] args) {
