@@ -8,7 +8,7 @@ public class GreedyAlgorithms {
     //you can do this in python but not java, unfortunately.
 
     public static Set<String> intersection(Set<String> setA, Set<String> setB){
-        Set<String> unionSet = new HashSet<>();
+        Set<String> intersectionSet = new HashSet<>();
 
         List<String> listA = new ArrayList<>(setA);
         List<String> listB = new ArrayList<>(setB);
@@ -16,10 +16,19 @@ public class GreedyAlgorithms {
         for (int i=0;i< listA.size();i++){
             for (int j=0;j< listB.size();j++){
                 if (listA.get(i).equals(listB.get(j))){
-                    unionSet.add(listA.get(i));
+                    intersectionSet.add(listA.get(i));
                 }
             }
         }
+
+        return intersectionSet;
+    }
+
+    public static Set<String> union(Set<String> setA, Set<String> setB){
+        Set<String> unionSet = new HashSet<>();
+
+        unionSet.addAll(setA);
+        unionSet.addAll(setB);
 
         return unionSet;
     }
