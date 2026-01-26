@@ -33,6 +33,29 @@ class GreedyAlgorithmsTest {
 
         assertEquals(c, GreedyAlgorithms.union(a, b));
 
+    }
 
+    @Test
+    void difference(){
+        Set<String> a = new HashSet<>();
+        Set<String> b = new HashSet<>();
+        Set<String> c = new HashSet<>();
+
+        a.add("a");
+        a.add("b");
+        a.add("c");
+
+        b.add("d");
+        b.add("e");
+        b.add("f");
+        b.add("c");
+
+        c.add("a");
+        c.add("b");
+        c.add("d");
+        c.add("e");
+        c.add("f");
+
+        assertEquals(c, GreedyAlgorithms.difference(a, b));
     }
 }

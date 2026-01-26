@@ -7,6 +7,7 @@ public class GreedyAlgorithms {
     //i want to try and write the union, intersection and difference methods for sets.
     //you can do this in python but not java, unfortunately.
 
+    //the intersection method.
     public static Set<String> intersection(Set<String> setA, Set<String> setB){
         Set<String> intersectionSet = new HashSet<>();
 
@@ -24,6 +25,7 @@ public class GreedyAlgorithms {
         return intersectionSet;
     }
 
+    //the union method
     public static Set<String> union(Set<String> setA, Set<String> setB){
         Set<String> unionSet = new HashSet<>();
 
@@ -31,6 +33,26 @@ public class GreedyAlgorithms {
         unionSet.addAll(setB);
 
         return unionSet;
+    }
+
+    //the difference method: so basically, this should be the opposite of the intersection method
+    public static Set<String> difference(Set<String> setA, Set<String> setB){
+        //so the difference set would be a union of both sets and then in loops, just remove elements that match.
+        Set<String> differenceSet = new HashSet<>(union(setA, setB));
+
+
+        List<String> listA = new ArrayList<>(setA);
+        List<String> listB = new ArrayList<>(setB);
+
+        for (int i=0;i< listA.size();i++){
+            for (int j=0;j< listB.size();j++){
+                if (listA.get(i).equals(listB.get(j))){
+                    differenceSet.remove(listA.get(i));
+                }
+            }
+        }
+
+        return differenceSet;
     }
 
 
