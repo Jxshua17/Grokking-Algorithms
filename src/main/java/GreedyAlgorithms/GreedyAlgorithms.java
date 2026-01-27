@@ -110,7 +110,7 @@ public class GreedyAlgorithms {
 
         Set<String> statesNeeded = new HashSet<>();
 
-        statesNeeded.add("lagos");
+        statesNeeded.add("Lagos");
         statesNeeded.add("Ogun");
         statesNeeded.add("Osun");
         statesNeeded.add("Delta");
@@ -125,23 +125,23 @@ public class GreedyAlgorithms {
         Set<String> states4 = new HashSet<>();
         Set<String> states5 = new HashSet<>();
 
-        states1.add("lagos");
-        states1.add("ogun");
-        states1.add("osun");
+        states1.add("Lagos");
+        states1.add("Ogun");
+        states1.add("Osun");
 
-        states2.add("lagos");
-        states2.add("delta");
-        states2.add("ekiti");
+        states2.add("Lagos");
+        states2.add("Delta");
+        states2.add("Ekiti");
 
-        states3.add("delta");
-        states3.add("abuja");
-        states3.add("kano");
+        states3.add("Delta");
+        states3.add("Abuja");
+        states3.add("Kano");
 
-        states4.add("ogun");
-        states4.add("osun");
+        states4.add("Ogun");
+        states4.add("Osun");
 
-        states5.add("abuja");
-        states5.add("edo");
+        states5.add("Abuja");
+        states5.add("Edo");
 
         //beatfm-lagos, ogun, osun
         //nigeria info-lagos, delta, ekiti
@@ -157,13 +157,15 @@ public class GreedyAlgorithms {
         stations.put("Inspiration FM", states5);
 
         Set<String> finalStations = new HashSet<>();
-        String bestStation = null;
-        Set<String>  statesCovered = new HashSet<>();
+        /*String bestStation = null;
+        Set<String>  statesCovered = new HashSet<>();*/
         Set<String>  covered;
 
         //TODO->debug this bastard.
 
         while(!(statesNeeded.isEmpty())){
+            String bestStation = null;
+            Set<String>  statesCovered = new HashSet<>();
             for (Map.Entry<String, Set<String>> station:stations.entrySet()){
                 //System.out.println("the station " + station.getKey() + " is covered in the following states " + station.getValue());
 
@@ -189,9 +191,12 @@ public class GreedyAlgorithms {
             }
             finalStations.add(bestStation);
             System.out.println("is the loop exited?");
+
+            System.out.println("the stations that cover the most distance are; " + finalStations);
             //the loop is exited so it is the while loop that is the issue. the set statesNeeded never empties.
 
             //i think i might have figured out the problem. i never increment the variable for the for loop.
+            //the logic was ound, the sets being compared were just different because some of the states in one were camelcase while the other was all lowercase.
         }
 
 
