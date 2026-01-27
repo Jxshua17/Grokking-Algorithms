@@ -25,6 +25,24 @@ public class GreedyAlgorithms {
         return intersectionSet;
     }
 
+    //overloaded the intersection method.
+    public static Set<Integer> intersection2(Set<Integer> set1, Set<Integer> set2){
+        Set<Integer> intersectionSet = new HashSet<>();
+
+        List<Integer> listA = new ArrayList<>(set1);
+        List<Integer> listB = new ArrayList<>(set2);
+
+        for (int i=0;i< listA.size();i++){
+            for (int j=0;j< listB.size();j++){
+                if (listA.get(i).equals(listB.get(j))){
+                    intersectionSet.add(listA.get(i));
+                }
+            }
+        }
+
+        return intersectionSet;
+    }
+
     //the union method
     public static Set<String> union(Set<String> setA, Set<String> setB){
         Set<String> unionSet = new HashSet<>();
@@ -68,68 +86,117 @@ public class GreedyAlgorithms {
 
         System.out.println(set);
 
-        Set<String> states = new HashSet<>();
+        System.out.println("states covered i believe");
+        String [] arr = {"lagos", "ogun", "osun", "delta", "ekiti", "abuja", "kano", "edo", "ekiti", "delta", "abuja"};
+
+       Set<String> shittyStates = new HashSet<>(Arrays.asList(arr));
+
+       System.out.println(shittyStates);
+
+
+
+
+
+       Hashtable<String, Integer> studs = new Hashtable<>();
+       studs.put("josh", 23);
+       studs.put("ruth", 34);
+       studs.put("roland", 45);
+       studs.put("rocky", 56);
+
+       for (Map.Entry<String, Integer> students: studs.entrySet()){
+           System.out.println("the student with the name " + students.getKey() + " is " + students.getValue() + " years old.");
+       }
+       System.out.println("....................");
+
+        Set<String> statesNeeded = new HashSet<>();
+
+        statesNeeded.add("lagos");
+        statesNeeded.add("Ogun");
+        statesNeeded.add("Osun");
+        statesNeeded.add("Delta");
+        statesNeeded.add("Ekiti");
+        statesNeeded.add("Abuja");
+        statesNeeded.add("Kano");
+        statesNeeded.add("Edo");
+
         Set<String> states1 = new HashSet<>();
         Set<String> states2 = new HashSet<>();
         Set<String> states3 = new HashSet<>();
-        states.add("lagos");
-        states.add("Ogun");
-        states.add("Osun");
-        states.add("Delta");
-        states.add("Ekiti");
-        states.add("Abuja");
-        states.add("Kano");
-        states.add("Edo");
+        Set<String> states4 = new HashSet<>();
+        Set<String> states5 = new HashSet<>();
 
-        String [] arr = {"lagos", "ogun", "osun", "delta", "ekiti", "abuja", "kano", "edo", "ekiti", "delta", "abuja"};
+        states1.add("lagos");
+        states1.add("ogun");
+        states1.add("osun");
 
-       for(int i=0;i<3;i++){
-           states1.add(arr[i]);
-       }
-       for(int i=3;i<6;i++){
-           states2.add(arr[i]);
-       }
-       for(int i=6;i<9;i++){
-           states3.add(arr[i]);
-       }
+        states2.add("lagos");
+        states2.add("delta");
+        states2.add("ekiti");
 
-        Set<String> shittyStates = new HashSet<>(Arrays.asList(arr));
+        states3.add("delta");
+        states3.add("abuja");
+        states3.add("kano");
 
-       System.out.println(shittyStates);
-       System.out.println(states);
-       System.out.println(states1);
-       System.out.println(states2);
-       System.out.println(states3);
+        states4.add("ogun");
+        states4.add("osun");
+
+        states5.add("abuja");
+        states5.add("edo");
+
+        //beatfm-lagos, ogun, osun
+        //nigeria info-lagos, delta, ekiti
+        //cool fm-delta, abuja, kano
+        //raypower-ogun, osun
+        //inspiration fm-abuja, edo
 
         HashMap<String, Set<String>> stations = new HashMap<>();
-
-
         stations.put("Beat FM", states1);
         stations.put("Nigeria Info", states2);
         stations.put("Cool FM", states3);
-
-        System.out.println(stations.get("Cool FM"));
+        stations.put("Raypower FM", states4);
+        stations.put("Inspiration FM", states5);
 
         Set<String> finalStations = new HashSet<>();
-        String bestStation;
+        String bestStation = null;
         Set<String>  statesCovered = new HashSet<>();
+        Set<String>  covered;
 
-        Set<String> a = new HashSet<>();
-        Set<String> b = new HashSet<>();
-        Set<String> c = new HashSet<>();
+        //TODO->debug this bastard.
 
-        a.add("avocado");
-        a.add("tomato");
-        a.add("banana");
+        while(!(statesNeeded.isEmpty())){
+            for (Map.Entry<String, Set<String>> station:stations.entrySet()){
+                //System.out.println("the station " + station.getKey() + " is covered in the following states " + station.getValue());
 
-        List<String> list = new ArrayList<>(a);
-        System.out.println(list.get(0));
+                covered = intersection(statesNeeded, station.getValue());
+                System.out.println("the covered states are->" + covered);
 
-        b.add("beets");
-        b.add("carrots");
-        b.add("tomato");
+                if (covered.size() > statesCovered.size()){
+                    bestStation = station.getKey();
+                    statesCovered = covered;
+                }
+            }
 
-        System.out.println(GreedyAlgorithms.intersection(a, b));
+            List<String> tempArr = new ArrayList<>(statesCovered);
+
+            //the challenge now is removing shit from the statesNeeded set.
+
+            for (int i=0;i< tempArr.size();){
+                System.out.println("have i been penetrated?");
+                System.out.println("the states before any removal ->" + statesNeeded);
+                statesNeeded.remove(tempArr.get(i));
+                System.out.println("the states after any removal ->" + statesNeeded);
+                i++;
+            }
+            finalStations.add(bestStation);
+            System.out.println("is the loop exited?");
+            //the loop is exited so it is the while loop that is the issue. the set statesNeeded never empties.
+
+            //i think i might have figured out the problem. i never increment the variable for the for loop.
+        }
+
+
+        System.out.println("the stations that cover the most distance are; " + finalStations);
+
 
 
 
