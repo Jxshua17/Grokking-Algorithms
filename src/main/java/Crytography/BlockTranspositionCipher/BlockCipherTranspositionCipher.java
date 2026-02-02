@@ -67,9 +67,37 @@ public class BlockCipherTranspositionCipher {
     }
 
     public static String decryption(String cipherText){
-        String plainText = "plaintext";
+        StringBuilder plainText = new StringBuilder();
 
-        return plainText;
+        int lengthOfCiphertext = cipherText.length();
+        ArrayList<Integer> factors = new ArrayList<>(factorization(lengthOfCiphertext));
+
+        int tempNo = factors.size() / 2;
+
+        int matrixRows = factors.get(tempNo);
+        int matrixColumns = factors.get(tempNo - 1);
+
+
+        char [][]block = new char[matrixColumns][matrixRows];
+
+        int k = 0;
+        while (k<lengthOfCiphertext){
+            for (int i=0;i<matrixColumns;i++){
+                for (int j=0;j<matrixRows;j++){
+                    block[i][j] = cipherText.charAt(k);
+                    k++;
+                }
+            }
+        }
+
+        for (int j=0;j<matrixRows;j++){
+            for (int i=0;i<matrixColumns;i++){
+                plainText.append(block[i][j]);
+            }
+        }
+
+
+        return plainText.toString();
     }
 
     public static void main(String[] args) {
@@ -89,6 +117,7 @@ public class BlockCipherTranspositionCipher {
         System.out.println(encryption("Six Degrees of Freedom is my favourite book at the moment."));
         System.out.println(encryption("Nicolas Dickner is such a fantastic writer."));
         System.out.println(encryption("I actually do love programming"));
+        System.out.println(encryption("are you fucking with me?"));
 
 
 
@@ -97,5 +126,13 @@ public class BlockCipherTranspositionCipher {
         System.out.println(numbers.getLast());
         System.out.println(numbers.get(x-1));
         System.out.println(numbers.get(x-2));
+
+
+        System.out.println("...........Decryption time..........");
+        System.out.println(decryption("Iu orm advomaloegicl  rntylpag"));
+        System.out.println(decryption("NlDniuantweiaiesc tirrcscr hfaci.o k s as t "));
+        System.out.println(decryption("SxDgeso reo sm aort oka h oeti ere fFedmi yfvuiebo ttemmn."));
+        System.out.println(decryption("j moyulevose eutml ."));
+        System.out.println(decryption("ayfiw rounimeucgte  k h?"));
     }
 }
