@@ -20,8 +20,6 @@ public class BlockCipherTranspositionCipher {
 
     //TODO -> work on a special configuration using the prime factors method to find the rxc for the matrix in the encryption method.
 
-    //first, i have to create the encryption method.
-
     public static String encryption(String plainText){
         StringBuilder cipherText = new StringBuilder();
         int matrixRows;
@@ -40,8 +38,12 @@ public class BlockCipherTranspositionCipher {
             plainText = plainText + " ";
         }
 
-        matrixRows = lengthOfPlainText / 2;
-        matrixColumns = 2;
+        ArrayList<Integer> tempArray = new ArrayList<>(factorization(lengthOfPlainText));
+        int tempArrSize = tempArray.size()/2; //dividing by two to use the two actual numbers in the factors array whose product is the size.
+
+        matrixRows = tempArray.get(tempArrSize);
+        matrixColumns = tempArray.get(tempArrSize - 1);
+
 
         char [][]block = new char[matrixRows][matrixColumns];
 
@@ -75,15 +77,25 @@ public class BlockCipherTranspositionCipher {
         System.out.println(nums[0][1]);
         nums[0][1] = 45;
         System.out.println(nums[0][1]);
-        System.out.println(encryption("just lemme love you."));
-        System.out.println(encryption("Six Degrees of Freedom is my favourite book at the moment."));
-        System.out.println(encryption("Nicolas Dickner is such a fantastic writer."));
-
         System.out.println(factorization(22));
         System.out.println(factorization(20));
         System.out.println(factorization(34));
         System.out.println(factorization(45));
         System.out.println(factorization(48));
         System.out.println(factorization(51));
+        System.out.println(factorization(112));
+        System.out.println(factorization(1000));
+        System.out.println(encryption("just lemme love you."));
+        System.out.println(encryption("Six Degrees of Freedom is my favourite book at the moment."));
+        System.out.println(encryption("Nicolas Dickner is such a fantastic writer."));
+        System.out.println(encryption("I actually do love programming"));
+
+
+
+        ArrayList<Integer> numbers = new ArrayList<>(factorization(45));
+        int x = numbers.size();
+        System.out.println(numbers.getLast());
+        System.out.println(numbers.get(x-1));
+        System.out.println(numbers.get(x-2));
     }
 }
