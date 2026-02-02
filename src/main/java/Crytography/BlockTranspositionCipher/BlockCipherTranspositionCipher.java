@@ -1,18 +1,21 @@
 package Crytography.BlockTranspositionCipher;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class BlockCipherTranspositionCipher {
 
     //TODO -> work on a method for finding what the prime factors of a number are.
-    public static ArrayList<Integer> primeFactorization(int number){
-        ArrayList<Integer> primeFactors = new ArrayList<>();
+    //i know the plan was to generate prime factors but the below method would do. it generates the factors of the argument given.
+    public static ArrayList<Integer> factorization(int number){
+        ArrayList<Integer> factors = new ArrayList<>();
 
+        for (int i=2;i<number;i++){
+            if (number % i == 0){
+                factors.add(i);
+            }
+        }
 
-
-        return primeFactors;
+        return factors;
     }
 
     //TODO -> work on a special configuration using the prime factors method to find the rxc for the matrix in the encryption method.
@@ -24,11 +27,12 @@ public class BlockCipherTranspositionCipher {
         int matrixRows;
         int matrixColumns;
 
-        //Hmmmmmm! I just figured out a way to generate the perfect number of rows and columns for the matrix.
-        //so after finding the length of the plainText, the next thing to do is to find the prime factors of the number...
-        //...using that, if the numbers are in an array, just pick the last two values in the array.
-        //take for example, 20. 2,2,5
-        //so if there are duplicate numbers, you find the product of the square of the duplicate and any other number in the array.
+        /*Hmmmmmm! I just figured out a way to generate the perfect number of rows and columns for the matrix.
+        so after finding the length of the plainText, the next thing to do is to find the prime factors of the number...
+        ...using that, if the numbers are in an array, just pick the last two values in the array.
+        take for example, 20. 2,2,5
+        so if there are duplicate numbers, you find the product of the square of the duplicate and any other number in the array.*/
+
         int lengthOfPlainText = plainText.length();
 
         if (lengthOfPlainText % 2 != 0) {
@@ -60,6 +64,12 @@ public class BlockCipherTranspositionCipher {
         return cipherText.toString();
     }
 
+    public static String decryption(String cipherText){
+        String plainText = "plaintext";
+
+        return plainText;
+    }
+
     public static void main(String[] args) {
         int [][] nums = new int[2][2];
         System.out.println(nums[0][1]);
@@ -68,5 +78,12 @@ public class BlockCipherTranspositionCipher {
         System.out.println(encryption("just lemme love you."));
         System.out.println(encryption("Six Degrees of Freedom is my favourite book at the moment."));
         System.out.println(encryption("Nicolas Dickner is such a fantastic writer."));
+
+        System.out.println(factorization(22));
+        System.out.println(factorization(20));
+        System.out.println(factorization(34));
+        System.out.println(factorization(45));
+        System.out.println(factorization(48));
+        System.out.println(factorization(51));
     }
 }
