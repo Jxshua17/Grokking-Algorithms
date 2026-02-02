@@ -30,13 +30,14 @@ public class BlockCipherTranspositionCipher {
         //take for example, 20. 2,2,5
         //so if there are duplicate numbers, you find the product of the square of the duplicate and any other number in the array.
         int lengthOfPlainText = plainText.length();
-        System.out.println("the length of the plain text " + lengthOfPlainText);
+
         if (lengthOfPlainText % 2 != 0) {
             lengthOfPlainText++;
+            plainText = plainText + " ";
         }
+
         matrixRows = lengthOfPlainText / 2;
         matrixColumns = 2;
-        System.out.println("the product is " + matrixColumns*matrixRows);
 
         char [][]block = new char[matrixRows][matrixColumns];
 
