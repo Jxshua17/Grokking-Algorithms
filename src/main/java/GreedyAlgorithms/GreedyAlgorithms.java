@@ -73,6 +73,23 @@ public class GreedyAlgorithms {
         return differenceSet;
     }
 
+    //So i am reading the Competitive Programming book and i am reading about sets so i thought to implement the complement method
+    public static Set<Integer> complement(Set<Integer> universalSet, Set<Integer> set){
+        Set<Integer> complementSet = new HashSet<>();
+
+        List<Integer> list = new ArrayList<>(set);
+
+        for (int i=0;i< set.size();i++){
+            for (int j:universalSet){
+                if (!(list.get(i).equals(j))){
+                    complementSet.add(list.get(i));
+                }
+            }
+        }
+
+        return complementSet;
+    }
+
 
     public static void main(String[] args) {
 
