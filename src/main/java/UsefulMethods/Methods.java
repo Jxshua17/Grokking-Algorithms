@@ -13,4 +13,17 @@ public class Methods {
 
         return newWord;
     }
+
+    //this method count the amount of a particular letter that are in a word/string(if you like).
+    public static int letterCount(String string, char letter){
+        int count = 0;
+
+        for (int i=0;i<string.length();i++){
+            if (string.charAt(i) == letter){
+                count++;
+            }
+        }
+
+        return count;
+    }
 }
